@@ -26,6 +26,11 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 // 2.13" Monochrome displays with 250x122 pixels and SSD1675 chipset
 ThinkInk_213_Mono_B72 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
 
+//soil mosisture
+int moisturevalue = 0; //value for storing moisture value 
+int soilPower = 7;//Variable for Soil moisture Power
+
+
 void setup() {
   Serial.begin(9600);
   while (!Serial) {
@@ -103,4 +108,10 @@ String getDateTimeAsString() {
   sprintf(humanReadableDate, "%02d:%02d:%02d %02d/%02d/%02d",  now.hour(), now.minute(), now.second(), now.day(), now.month(), now.year());
 
   return humanReadableDate;
+}
+//This is a function used to get the soil moisture content
+int readSoil()
+{
+    moisturevalue = analogRead(soilPin);//Read the SIG value form sensor 
+    return moisturevalue;//send current moisture value
 }
