@@ -35,7 +35,7 @@ Adafruit_DCMotor *myMotor = AFMS.getMotor(4);
 
 // Soil Moisture
 int moistureValue = 0; //value for storing moisture value
-int soilPin = 12;//Declare a variable for the soil moisture sensor
+int soilPin = A2;//Declare a variable for the soil moisture sensor
 
 
 void setup() {
@@ -56,7 +56,7 @@ void setup() {
   }
 
   // The following line can be uncommented if the time needs to be reset.
-//  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  //  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
   rtc.start();
 
@@ -87,8 +87,8 @@ void loop() {
   drawText(String(moisture), EPD_BLACK, 2, 0, 100);
   display.display();
 
-waterPlant(moisture);
-  
+  waterPlant(moisture);
+
   logEvent("Updating the EPD");
   // waits 180 seconds (3 minutes) as per guidelines from adafruit.
   delay(180000);
@@ -144,7 +144,7 @@ void setupSD() {
     return;
   }
   Serial.println("SD Started");
-//  delay(1000);
+  //  delay(1000);
 }
 
 void logEvent(String dataToLog) {
@@ -203,17 +203,17 @@ int readSoil()
 }
 
 void waterPlant(int moistureValue) {
-/*  
- *   **Write a function** which takes the moisture value, 
- *   and if it's below a certain value, turns the pump on. 
- *   The function is to be called `waterPlant()` which will 
- *   take the moisture value as an argument, and return no value.
- */
- if (int moistureValue < 1000 ){
-  //motor/pump on
-  myMoter->run(Forward);
- } else {
-  //motor/pump off
-  myMotor->run(RELEASE);
- }
+  /*
+   *   **Write a function** which takes the moisture value,
+       and if it's below a certain value, turns the pump on.
+       The function is to be called `waterPlant()` which will
+       take the moisture value as an argument, and return no value.
+  */
+  if (moistureValue < 1000 ) {
+    //motor/pump on
+    myMotor->run(FORWARD);
+  } else {
+    //motor/pump off
+    myMotor->run(RELEASE);
+  }
 }
