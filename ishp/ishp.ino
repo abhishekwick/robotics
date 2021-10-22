@@ -21,6 +21,9 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 #include "wifiConfig.h"
 AsyncWebServer server(80);
 
+const char* http_username = "admin1";
+const char* http_password = "admin1";
+
 // EINK
 #include "Adafruit_ThinkInk.h"
 
@@ -49,7 +52,7 @@ void setup() {
     delay(10);
   }
   delay(1000);
-
+  pinMode(LED_BUILTIN, OUTPUT);
 
   // RTC
   if (! rtc.begin()) {
@@ -160,7 +163,7 @@ void logEvent(String dataToLog) {
   Serial.println(logEntry);
 
 
- 
+
 }
 
 //This is a function used to get the soil moisture content
